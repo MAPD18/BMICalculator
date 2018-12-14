@@ -17,9 +17,11 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onAddBMIButtonClicked(_ sender: Any) {
+        // Create a Popup to get the new weight input from user
         let alert = UIAlertController(title: "Add new Log Entry", message: "Whats is your weight Today?", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Weight"
+            textField.keyboardType = .numberPad
         }
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
             let textField = alert.textFields![0] as UITextField
@@ -34,6 +36,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(alert, animated: true, completion: nil)
     }
     
+    // save log entry to CoreData
     func saveLogEntry(entry: BmiLogEntry) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -51,27 +54,29 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         height = UserDefaults.standard.float(forKey: AppConstants.height_key)
-        // Do any additional setup after loading the view.
-        
+        fetchLogEntries()
+    }
+    
+    // fetch Log Entries from CoreData
+    func fetchLogEntries() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: AppConstants.log_entry_entity)
-                //request.predicate = NSPredicate(format: "age = %@", "12")
-                request.returnsObjectsAsFaults = false
-                do {
-                    let result = try context.fetch(request)
-                    for data in result as! [NSManagedObject] {
-                        let logEntry = BmiLogEntry()
-                        logEntry.weight = data.value(forKey: AppConstants.log_entry_weight) as! Float
-                        logEntry.date = data.value(forKey: AppConstants.log_entry_date) as! Date
-                        bmiList.append(logEntry)
-                    }
-                    tableView.reloadData()
-                } catch {
-                    print("Failed")
-                }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: AppConstants.log_entry_entity)
+        //request.predicate = NSPredicate(format: "age = %@", "12")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                let logEntry = BmiLogEntry()
+                logEntry.weight = data.value(forKey: AppConstants.log_entry_weight) as! Float
+                logEntry.date = data.value(forKey: AppConstants.log_entry_date) as! Date
+                bmiList.append(logEntry)
+            }
+            tableView.reloadData()
+        } catch {
+            print("Failed")
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,6 +90,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bmiLogEntryCell", for: indexPath) as! BmiLogEntryCell
         
+        // populate cell with LogEntry entity information
         cell.weight.text = String(bmiList[indexPath.row].weight)
         cell.date.text = bmiList[indexPath.row].date.description
         let status = calculateBmi(weight: bmiList[indexPath.row].weight)
@@ -93,6 +99,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    // Calculate BMI based on heiht and weight
     func calculateBmi(weight: Float) -> BmiStatus {
         let bmi = Float(weight)/pow(height, 2)
         switch bmi {
@@ -115,6 +122,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // Change cell's background collor acordingly to the BMI status
     func getBackgroundByStatus(status: BmiStatus) -> UIColor {
         switch status {
         case .severeThinness, .obeseClassIII:

@@ -11,8 +11,6 @@ import CoreData
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
-
     @IBOutlet weak var nameOutlet: UITextField!
     @IBOutlet weak var ageOutlet: UITextField!
     @IBOutlet weak var genderPickerView: UIPickerView!
@@ -27,6 +25,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         genderPickerView.delegate = self
         genderPickerView.dataSource = self
         
+        initFormFromLocalStorage()
+    }
+    
+    // Init TextFields with informations stored at UserDefaults
+    func initFormFromLocalStorage() {
         if let name = UserDefaults.standard.string(forKey: AppConstants.name_key) {
             nameOutlet.text = name
         }
@@ -38,7 +41,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         let gender = UserDefaults.standard.integer(forKey: AppConstants.gender_key)
         genderPickerView.selectRow(gender, inComponent: 0, animated: true)
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -55,20 +57,24 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func onSaveClicked(_ sender: Any) {
+        //save user information on UserDefaults storage
         UserDefaults.standard.set(nameOutlet.text!, forKey: AppConstants.name_key)
         UserDefaults.standard.set(Int(ageOutlet.text!), forKey: AppConstants.age_key)
         UserDefaults.standard.set(Float(heightOutlet.text!), forKey: AppConstants.height_key)
         UserDefaults.standard.set(genderSelectedRow, forKey: AppConstants.gender_key)
         
+        // Shows an popup giving feedback about the process
         let alert = UIAlertController(title: "Successfull", message: "User Record Saved!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func onResetClicked(_ sender: Any) {
+        // Clear UserDefaults records
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize();
         
+        // Clear CoreData Entuty records
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         
