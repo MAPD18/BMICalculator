@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bc1-ob-Pyn">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tab Bar View Controller-->
+        <scene sceneID="Qqy-3E-JGQ">
+            <objects>
+                <tabBarController id="bc1-ob-Pyn" customClass="TabBarViewController" customModule="BMICalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AKe-Wh-7fA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="kSa-aW-Kpu"/>
+                        <segue destination="pA9-Io-tMG" kind="relationship" relationship="viewControllers" id="JNt-A2-imb"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IC6-FB-71A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1477" y="-140"/>
+        </scene>
+        <!--Profile-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BMICalculator" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,13 +40,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Profile" id="IWM-mQ-K3s">
-                                        <barButtonItem key="rightBarButtonItem" title="Log" id="nLp-9R-uOQ">
-                                            <connections>
-                                                <segue destination="pA9-Io-tMG" kind="show" id="5ro-XO-mEL"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Profile" id="IWM-mQ-K3s"/>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLJ-wf-KLp">
@@ -96,6 +108,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" id="IHI-42-YXj"/>
                     <connections>
                         <outlet property="ageOutlet" destination="jwf-6G-zpx" id="WGC-ed-tIF"/>
                         <outlet property="genderPickerView" destination="zpq-w5-fFs" id="f0w-H4-1mr"/>
@@ -105,9 +118,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="133.25892857142856"/>
+            <point key="canvasLocation" x="-451" y="-421"/>
         </scene>
-        <!--Log View Controller-->
+        <!--Log-->
         <scene sceneID="BJY-ZZ-hIf">
             <objects>
                 <viewController id="pA9-Io-tMG" customClass="BMILogViewController" customModule="BMICalculator" customModuleProvider="target" sceneMemberID="viewController">
@@ -119,7 +132,6 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="BMI Log" id="kgO-dI-4L6">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RC1-4n-2VS"/>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9JU-TZ-USl">
                                             <connections>
                                                 <action selector="onAddBMIButtonClicked:" destination="pA9-Io-tMG" id="D9d-2c-x1B"/>
@@ -129,7 +141,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zUX-IF-lRY">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bmiLogEntryCell" id="lj5-KX-68v" customClass="BmiLogEntryCell" customModule="BMICalculator" customModuleProvider="target">
@@ -188,13 +200,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1a9-u9-pEa"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Log" id="DfQ-6f-zZo"/>
                     <connections>
                         <outlet property="tableView" destination="zUX-IF-lRY" id="0De-CD-T1A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TU-47-5Vt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936.23188405797111" y="132.58928571428572"/>
+            <point key="canvasLocation" x="-452" y="261"/>
         </scene>
     </scenes>
 </document>
