@@ -16,11 +16,11 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onAddBMIButtonClicked(_ sender: Any) {
-        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add new Log Entry", message: "Whats is your weight Today?", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Weight"
         }
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
             let textField = alert.textFields![0] as UITextField
             let bm = BmiLogEntry()
             bm.date = Date()
@@ -51,8 +51,9 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.weight.text = String(bmiList[indexPath.row].weight)
         cell.date.text = bmiList[indexPath.row].date.description
-        cell.status.text = calculateBmi(weight: bmiList[indexPath.row].weight).rawValue
-        
+        let status = calculateBmi(weight: bmiList[indexPath.row].weight)
+        cell.status.text = status.rawValue
+        cell.backgroundColor = getBackgroundByStatus(status: status)
         return cell
     }
     
@@ -75,6 +76,19 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return BmiStatus.obeseClassII
         default:
             return BmiStatus.obeseClassIII
+        }
+    }
+    
+    func getBackgroundByStatus(status: BmiStatus) -> UIColor {
+        switch status {
+        case .severeThinness, .obeseClassIII:
+            return UIColor(red: 96/255, green: 20/255, blue: 0, alpha: 1)
+        case .obeseClassII, .obeseClassI, .moderateThinness:
+            return UIColor(red: 176/255, green: 36/255, blue: 0, alpha: 1)
+        case .mildThinness, .overweight:
+            return UIColor(red: 201/255, green: 115/255, blue: 0, alpha: 1)
+        case .normal:
+            return UIColor(red: 21/255, green: 196/255, blue: 91/255, alpha: 1)
         }
     }
 
