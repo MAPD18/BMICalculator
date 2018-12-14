@@ -37,7 +37,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func saveLogEntry(entry: BmiLogEntry) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "LogEntry", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: AppConstants.log_entry_entity, in: context)
         let newLogEntry = NSManagedObject(entity: entity!, insertInto: context)
         newLogEntry.setValue(entry.weight, forKey: AppConstants.log_entry_weight)
         newLogEntry.setValue(entry.date, forKey: AppConstants.log_entry_date)
@@ -57,7 +57,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LogEntry")
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: AppConstants.log_entry_entity)
                 //request.predicate = NSPredicate(format: "age = %@", "12")
                 request.returnsObjectsAsFaults = false
                 do {

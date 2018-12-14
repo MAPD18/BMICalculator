@@ -14,6 +14,7 @@ class AppConstants {
     static let height_key = "height"
     static let gender_key = "gender"
     
+    static let log_entry_entity = "LogEntry"
     static let log_entry_weight = "weight"
     static let log_entry_date = "date"
 }
