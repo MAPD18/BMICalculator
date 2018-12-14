@@ -37,29 +37,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         heightOutlet.text = String(height)
         
         let gender = UserDefaults.standard.integer(forKey: AppConstants.gender_key)
-        genderPickerView.selectedRow(inComponent: gender)
+        genderPickerView.selectRow(gender, inComponent: 0, animated: true)
         
-        
-        
-        
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //let context = appDelegate.persistentContainer.viewContext
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserProfile")
-//        //request.predicate = NSPredicate(format: "age = %@", "12")
-//        request.returnsObjectsAsFaults = false
-//        do {
-//            let result = try context.fetch(request)
-//            for data in result as! [NSManagedObject] {
-//                nameOutlet.text = data.value(forKey: "name") as? String
-//                ageOutlet.text = data.value(forKey: "age") as? String
-//                //genderPickerView.selectedRow(inComponent: (data.value(forKey: "age") as? Int)!)
-//                print(data.value(forKey: "name") as! String)
-//            }
-//            
-//        } catch {
-//            
-//            print("Failed")
-//        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
