@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -24,18 +25,53 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let textField = alert.textFields![0] as UITextField
             let bm = BmiLogEntry()
             bm.date = Date()
-            bm.weight = Int(textField.text!)!
+            bm.weight = Float(textField.text!)!
             self.bmiList.append(bm)
             self.tableView.reloadData()
+            
+            self.saveLogEntry(entry: bm)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func saveLogEntry(entry: BmiLogEntry) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "LogEntry", in: context)
+        let newLogEntry = NSManagedObject(entity: entity!, insertInto: context)
+        newLogEntry.setValue(entry.weight, forKey: AppConstants.log_entry_weight)
+        newLogEntry.setValue(entry.date, forKey: AppConstants.log_entry_date)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        height = UserDefaults.standard.float(forKey: "height")
+        height = UserDefaults.standard.float(forKey: AppConstants.height_key)
         // Do any additional setup after loading the view.
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LogEntry")
+                //request.predicate = NSPredicate(format: "age = %@", "12")
+                request.returnsObjectsAsFaults = false
+                do {
+                    let result = try context.fetch(request)
+                    for data in result as! [NSManagedObject] {
+                        let logEntry = BmiLogEntry()
+                        logEntry.weight = data.value(forKey: AppConstants.log_entry_weight) as! Float
+                        logEntry.date = data.value(forKey: AppConstants.log_entry_date) as! Date
+                        bmiList.append(logEntry)
+                    }
+                    tableView.reloadData()
+                } catch {
+                    print("Failed")
+                }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,7 +93,7 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func calculateBmi(weight: Int) -> BmiStatus {
+    func calculateBmi(weight: Float) -> BmiStatus {
         let bmi = Float(weight)/pow(height, 2)
         switch bmi {
         case 0..<16:
@@ -95,10 +131,8 @@ class BMILogViewController: UIViewController, UITableViewDelegate, UITableViewDa
 }
 
 class BmiLogEntry {
-    var weight = 0
-    var height = 0
+    var weight : Float = 0
     var date = Date()
-    var status = ""
 }
 
 enum BmiStatus : String {

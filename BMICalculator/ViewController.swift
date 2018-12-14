@@ -27,6 +27,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         genderPickerView.delegate = self
         genderPickerView.dataSource = self
         
+        if let name = UserDefaults.standard.string(forKey: AppConstants.name_key) {
+            nameOutlet.text = name
+        }
+        let age = UserDefaults.standard.integer(forKey: AppConstants.age_key)
+        ageOutlet.text = String(age)
+        
+        let height = UserDefaults.standard.float(forKey: AppConstants.height_key)
+        heightOutlet.text = String(height)
+        
+        let gender = UserDefaults.standard.integer(forKey: AppConstants.gender_key)
+        genderPickerView.selectedRow(inComponent: gender)
+        
+        
+        
+        
         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
         //let context = appDelegate.persistentContainer.viewContext
 //        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserProfile")
@@ -61,8 +76,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func onSaveClicked(_ sender: Any) {
-        let height = Float(heightOutlet.text!)
-        UserDefaults.standard.set(height, forKey: "height")
+        UserDefaults.standard.set(nameOutlet.text!, forKey: AppConstants.name_key)
+        UserDefaults.standard.set(Int(ageOutlet.text!), forKey: AppConstants.age_key)
+        UserDefaults.standard.set(Float(heightOutlet.text!), forKey: AppConstants.height_key)
+        UserDefaults.standard.set(genderSelectedRow, forKey: AppConstants.gender_key)
+        
+        let alert = UIAlertController(title: "Successfull", message: "User Record Saved!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 

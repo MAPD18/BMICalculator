@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F66098C221C36C2000E896A9 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66098C121C36C2000E896A9 /* AppConstants.swift */; };
 		F6AEDE8721C329A40058ACC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AEDE8621C329A40058ACC4 /* AppDelegate.swift */; };
 		F6AEDE8921C329A40058ACC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AEDE8821C329A40058ACC4 /* ViewController.swift */; };
 		F6AEDE8C21C329A40058ACC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6AEDE8A21C329A40058ACC4 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F66098C121C36C2000E896A9 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F6AEDE8321C329A40058ACC4 /* BMICalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMICalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6AEDE8621C329A40058ACC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6AEDE8821C329A40058ACC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				F6AEDE8D21C329A40058ACC4 /* BMICalculator.xcdatamodeld */,
 				F6AEDE9E21C33F570058ACC4 /* BMILogViewController.swift */,
 				F6AEDEA021C345950058ACC4 /* BmiLogEntryCell.swift */,
+				F66098C121C36C2000E896A9 /* AppConstants.swift */,
 			);
 			path = BMICalculator;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6AEDE8921C329A40058ACC4 /* ViewController.swift in Sources */,
+				F66098C221C36C2000E896A9 /* AppConstants.swift in Sources */,
 				F6AEDEA121C345950058ACC4 /* BmiLogEntryCell.swift in Sources */,
 				F6AEDE8721C329A40058ACC4 /* AppDelegate.swift in Sources */,
 				F6AEDE9F21C33F570058ACC4 /* BMILogViewController.swift in Sources */,
