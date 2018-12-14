@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var nameOutlet: UITextField!
     @IBOutlet weak var ageOutlet: UITextField!
     @IBOutlet weak var genderPickerView: UIPickerView!
+    @IBOutlet weak var heightOutlet: UITextField!
     
     let genders = ["Male", "Female"]
     var genderSelectedRow = 0
@@ -59,26 +60,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return 1
     }
     
-    @IBAction func onSaveButtonClicked(_ sender: Any) {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//
-//        let entity = NSEntityDescription.entity(forEntityName: "UserProfile", in: context)
-//        let newUser = NSManagedObject(entity: entity!, insertInto: context)
-//
-//        newUser.setValue(nameOutlet.text, forKey: "name")
-//        newUser.setValue(Int(ageOutlet.text!), forKey: "age")
-//        newUser.setValue(genderSelectedRow, forKey: "gender")
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            print("ERROR")
-//        }
-        
-        
+    @IBAction func onSaveClicked(_ sender: Any) {
+        let height = Float(heightOutlet.text!)
+        UserDefaults.standard.set(height, forKey: "height")
     }
-    
     
 
 }

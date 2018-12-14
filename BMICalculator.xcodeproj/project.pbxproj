@@ -14,6 +14,7 @@
 		F6AEDE9121C329A80058ACC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6AEDE9021C329A80058ACC4 /* Assets.xcassets */; };
 		F6AEDE9421C329A80058ACC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6AEDE9221C329A80058ACC4 /* LaunchScreen.storyboard */; };
 		F6AEDE9F21C33F570058ACC4 /* BMILogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AEDE9E21C33F570058ACC4 /* BMILogViewController.swift */; };
+		F6AEDEA121C345950058ACC4 /* BmiLogEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AEDEA021C345950058ACC4 /* BmiLogEntryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F6AEDE9321C329A80058ACC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F6AEDE9521C329A80058ACC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6AEDE9E21C33F570058ACC4 /* BMILogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMILogViewController.swift; sourceTree = "<group>"; };
+		F6AEDEA021C345950058ACC4 /* BmiLogEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiLogEntryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				F6AEDE9521C329A80058ACC4 /* Info.plist */,
 				F6AEDE8D21C329A40058ACC4 /* BMICalculator.xcdatamodeld */,
 				F6AEDE9E21C33F570058ACC4 /* BMILogViewController.swift */,
+				F6AEDEA021C345950058ACC4 /* BmiLogEntryCell.swift */,
 			);
 			path = BMICalculator;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6AEDE8921C329A40058ACC4 /* ViewController.swift in Sources */,
+				F6AEDEA121C345950058ACC4 /* BmiLogEntryCell.swift in Sources */,
 				F6AEDE8721C329A40058ACC4 /* AppDelegate.swift in Sources */,
 				F6AEDE9F21C33F570058ACC4 /* BMILogViewController.swift in Sources */,
 				F6AEDE8F21C329A40058ACC4 /* BMICalculator.xcdatamodeld in Sources */,
